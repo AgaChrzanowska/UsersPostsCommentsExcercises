@@ -10,33 +10,20 @@ using UsersPostsCommentsExcercises.Pages;
 namespace UsersPostsCommentsExcercises.Tests
 {
     [TestClass]
-    public class WelcomeTests
+    public class WelcomeTests: BaseTests
     {
-        private IWebDriver _driver;
         WelcomePageObject _welcomePageObject;
-        FileLogHelper _fileLogHelper = new FileLogHelper();
 
         [TestInitialize]
         public void SetUp()
         {
-            _driver = new ChromeDriver();
-            _welcomePageObject = new WelcomePageObject(_driver);
+            Driver = new ChromeDriver();
+            _welcomePageObject = new WelcomePageObject(Driver);
             string url = "http://localhost:4200/home";
-            _driver.Navigate().GoToUrl(url);
+            Driver.Navigate().GoToUrl(url);
         }
 
-        [TestMethod]
-        public void Check_List_Menu_Count()
-        {
-            try
-            {
-                Assert.AreEqual(3, _welcomePageObject.GetListMenuCount());
-            }
-            catch (AssertFailedException afe)
-            {
-                _fileLogHelper.Save(afe);
-            }
-        }
+      
 
         [TestMethod]
         public void Check_H1_Text()
@@ -48,7 +35,7 @@ namespace UsersPostsCommentsExcercises.Tests
             catch (AssertFailedException afe)
             {
 
-                _fileLogHelper.Save(afe);
+                FileLogHelper.Save(afe);
             }
         }
 
@@ -63,23 +50,18 @@ namespace UsersPostsCommentsExcercises.Tests
             catch (AssertFailedException afe)
             {
 
-                _fileLogHelper.Save(afe);
+                FileLogHelper.Save(afe);
             }
         }
+
         [TestMethod]
         public void Check_If_Button_Switches_To_Posts()
         {
             PostsPageObject ppo = _welcomePageObject.RedirectToPosts();
-            Assert.AreEqual("http://localhost:4200/posts", _driver.Url);
+            Assert.AreEqual("http://localhost:4200/posts", Driver.Url);
             // Alternative method to get url
             Assert.AreEqual("http://localhost:4200/posts", ppo.GetCurrentUrl());
             Assert.AreEqual("List of posts with authors", ppo.H1Text.Text);
-        }
-
-        [TestCleanup]
-        public void Finish()
-        {
-            _driver.Dispose();
         }
     }
 }

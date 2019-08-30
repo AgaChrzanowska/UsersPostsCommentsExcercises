@@ -56,12 +56,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Pages\BasePageObject.cs" />
     <Compile Include="FileLogHelper.cs" />
     <Compile Include="Pages\AboutPageObject.cs" />
+    <Compile Include="Pages\IHaveTopMenu.cs" />
     <Compile Include="Pages\PostsPageObject.cs" />
+    <Compile Include="Pages\TopMenuPageObject.cs" />
     <Compile Include="Pages\WelcomePageObject.cs" />
     <Compile Include="Tests\PostsTest.cs" />
     <Compile Include="Tests\AboutTests.cs" />
+    <Compile Include="Tests\TopMenuTests.cs" />
+    <Compile Include="Tests\BaseTests.cs" />
     <Compile Include="Tests\WelcomeTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

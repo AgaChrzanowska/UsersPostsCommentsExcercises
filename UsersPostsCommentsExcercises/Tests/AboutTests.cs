@@ -7,19 +7,17 @@ using UsersPostsCommentsExcercises.Pages;
 namespace UsersPostsCommentsExcercises.Tests
 {
     [TestClass]
-    public class AboutTests
+    public class AboutTests: BaseTests
     {
-        private IWebDriver _driver;
         AboutPageObject _aboutPageObject;
-        FileLogHelper _fileLogHelper = new FileLogHelper();
 
         [TestInitialize]
         public void SetUp()
         {
-            _driver = new ChromeDriver();
-            _aboutPageObject = new AboutPageObject(_driver);
+            Driver = new ChromeDriver();
+            _aboutPageObject = new AboutPageObject(Driver);
             string url = "http://localhost:4200/about";
-            _driver.Navigate().GoToUrl(url);
+            Driver.Navigate().GoToUrl(url);
         }
 
         [TestMethod]
@@ -31,7 +29,7 @@ namespace UsersPostsCommentsExcercises.Tests
             }
             catch (AssertFailedException afe)
             {
-                _fileLogHelper.Save(afe);
+               FileLogHelper.Save(afe);
             }
         }
         [TestMethod]
@@ -43,14 +41,8 @@ namespace UsersPostsCommentsExcercises.Tests
             }
             catch (AssertFailedException afe)
             {
-                _fileLogHelper.Save(afe);
+                FileLogHelper.Save(afe);
             }
-        }
-
-        [TestCleanup]
-        public void Finish()
-        {
-            _driver.Dispose();
         }
     }
 }

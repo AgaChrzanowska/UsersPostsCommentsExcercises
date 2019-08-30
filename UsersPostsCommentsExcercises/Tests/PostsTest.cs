@@ -7,19 +7,17 @@ using UsersPostsCommentsExcercises.Pages;
 namespace UsersPostsCommentsExcercises.Tests
 {
     [TestClass]
-    public class PostsTest
+    public class PostsTest: BaseTests
     {
-        private IWebDriver _driver;
         PostsPageObject _postPageObject;
-        FileLogHelper _fileLogHelper = new FileLogHelper();
 
         [TestInitialize]
         public void SetUp()
         { 
-            _driver = new ChromeDriver();
-            _postPageObject = new PostsPageObject(_driver);
+            Driver = new ChromeDriver();
+            _postPageObject = new PostsPageObject(Driver);
             string url = "http://localhost:4200/posts";
-            _driver.Navigate().GoToUrl(url);
+            Driver.Navigate().GoToUrl(url);
         }
 
         [TestMethod]
@@ -31,7 +29,7 @@ namespace UsersPostsCommentsExcercises.Tests
             }
             catch (AssertFailedException afe)
             {
-                _fileLogHelper.Save(afe);
+                FileLogHelper.Save(afe);
             }
         }
 
@@ -44,7 +42,7 @@ namespace UsersPostsCommentsExcercises.Tests
             }
             catch (AssertFailedException afe)
             {
-                _fileLogHelper.Save(afe);
+                FileLogHelper.Save(afe);
             }
         }
 
@@ -57,7 +55,7 @@ namespace UsersPostsCommentsExcercises.Tests
             }
             catch (AssertFailedException afe)
             {
-                _fileLogHelper.Save(afe);
+                FileLogHelper.Save(afe);
             }
         }
         [TestMethod]
@@ -69,7 +67,7 @@ namespace UsersPostsCommentsExcercises.Tests
             }
             catch (AssertFailedException afe)
             {
-                _fileLogHelper.Save(afe);
+                FileLogHelper.Save(afe);
             }
         }
         [TestMethod]
@@ -82,14 +80,8 @@ namespace UsersPostsCommentsExcercises.Tests
             catch (AssertFailedException afe)
             {
 
-                _fileLogHelper.Save(afe);
+                FileLogHelper.Save(afe);
             }
-        }
-
-        [TestCleanup]
-        public void Finish()
-        {
-            _driver.Dispose();
         }
     }
 }

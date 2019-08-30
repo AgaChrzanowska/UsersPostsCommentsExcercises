@@ -9,22 +9,21 @@ using System.Threading.Tasks;
 
 namespace UsersPostsCommentsExcercises.Pages
 {
-    class AboutPageObject
+    public class AboutPageObject: BasePageObject, IHaveTopMenu
     {
-        public WebDriverWait _wait;
-        public IWebDriver Driver { get; set; }
-
         [FindsBy(How = How.TagName, Using = "H1")]
         public IWebElement H1 { get; set; }
 
         [FindsBy(How = How.Id, Using = "about")]
         public IWebElement About { get; set; }
 
-        public AboutPageObject(IWebDriver driver)
+        public AboutPageObject(IWebDriver driver): base(driver)
         {
-            this.Driver = driver;
-            _wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
-            PageFactory.InitElements(driver, this);
+        }
+
+        public TopMenuPageObject GetTopMenu()
+        {
+            throw new NotImplementedException();
         }
     }
 }

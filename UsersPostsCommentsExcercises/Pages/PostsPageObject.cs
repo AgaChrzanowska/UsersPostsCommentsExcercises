@@ -9,11 +9,8 @@ using OpenQA.Selenium.Support.UI;
 
 namespace UsersPostsCommentsExcercises.Pages
 {
-    public class PostsPageObject
+    public class PostsPageObject: BasePageObject, IHaveTopMenu
     {
-        private WebDriverWait _wait;
-        public IWebDriver Driver { get; set; }
-
         [FindsBy(How = How.CssSelector, Using = "#content > div > app-posts > div > h1")]
         public IWebElement H1Text { get; set; }
 
@@ -26,11 +23,8 @@ namespace UsersPostsCommentsExcercises.Pages
         [FindsBy(How = How.ClassName, Using = "float-right")]
         public IWebElement PageReport { get; set; }
 
-        public PostsPageObject(IWebDriver driver)
+        public PostsPageObject(IWebDriver driver): base(driver)
         {
-            this.Driver = driver;
-            _wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
-            PageFactory.InitElements(driver, this);
         }
 
         public string GetNameHeadings(int index)
@@ -41,6 +35,10 @@ namespace UsersPostsCommentsExcercises.Pages
         public string GetCurrentUrl()
         {
             return Driver.Url;
+        }
+        public TopMenuPageObject GetTopMenu()
+        {
+            throw new NotImplementedException();
         }
     }
 }

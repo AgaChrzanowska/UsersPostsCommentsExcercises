@@ -10,11 +10,8 @@ using System.Threading.Tasks;
 
 namespace UsersPostsCommentsExcercises.Pages
 {
-    public class WelcomePageObject
+    public class WelcomePageObject : BasePageObject, IHaveTopMenu
     {
-        private WebDriverWait _wait;
-        public IWebDriver Driver { get; set; }
-
         [FindsBy(How = How.Id, Using = "navbarTogglerDemo02")]
         public IWebElement NavBox { get; set; }
 
@@ -33,23 +30,19 @@ namespace UsersPostsCommentsExcercises.Pages
         [FindsBy(How = How.Id, Using = "btn1")]
         public IWebElement BtnSeePosts { get; set; }
 
-        public WelcomePageObject(IWebDriver driver)
+        public WelcomePageObject(IWebDriver driver): base(driver)
         {
-            this.Driver = driver;
-            _wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
-            PageFactory.InitElements(driver, this);
         }
-
-        public int GetListMenuCount()
-        {
-            int menuList = Menu.Count();
-            return menuList;
-        }
-
+       
         public PostsPageObject RedirectToPosts()
         {
             BtnSeePosts.Click();
             return new PostsPageObject(this.Driver);
+        }
+
+        public TopMenuPageObject GetTopMenu()
+        {
+            return new TopMenuPageObject(this.Driver);
         }
 
     }
